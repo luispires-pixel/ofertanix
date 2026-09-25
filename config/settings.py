@@ -8,16 +8,15 @@ SECRET_KEY = os.environ.get(
     "dev-only-change-before-deploy"
 )
 
-DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
+DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
 
 ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.environ.get(
-        "ALLOWED_HOSTS",
-        "localhost,127.0.0.1"
-    ).split(",")
-    if host.strip()
+    "localhost",
+    "127.0.0.1",
+    os.environ.get("FAABLE_HOST", "").strip(),
 ]
+
+ALLOWED_HOSTS = [host for host in ALLOWED_HOSTS if host]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
