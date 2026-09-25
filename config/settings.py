@@ -26,6 +26,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ofertas",
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://ofertanix-q29q2.faable.link",
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
