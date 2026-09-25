@@ -1,0 +1,462 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OfertaNix</title>
+
+    <link rel="stylesheet" href="{% static 'ofertas/style.css' %}">
+</head>
+
+<body>
+
+    <!-- EFEITOS DO FUNDO -->
+    <div class="background">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="grid"></div>
+    </div>
+
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="container navbar-content">
+
+            <a href="/" class="logo">
+                <span class="logo-icon">🔥</span>
+                <span>Oferta<span class="logo-highlight">Nix</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="#inicio">Início</a>
+                <a href="#categorias">Categorias</a>
+                <a href="#ofertas">Ofertas</a>
+                <a href="#sobre">Sobre</a>
+            </nav>
+
+            <a href="#ofertas" class="nav-button">
+                Ver ofertas
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero" id="inicio">
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <div class="badge">
+                        <span class="badge-dot"></span>
+                        Ofertas selecionadas todos os dias
+                    </div>
+
+                    <h1>
+                        Encontre ofertas
+                        <span>que realmente valem a pena.</span>
+                    </h1>
+
+                    <p>
+                        Tecnologia, games, academia, acessórios e muito mais.
+                        Eu encontro os produtos e você encontra o melhor preço.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#ofertas" class="primary-button">
+                            Explorar ofertas
+                            <span>→</span>
+                        </a>
+
+                        <a href="#categorias" class="secondary-button">
+                            Ver categorias
+                        </a>
+
+                    </div>
+
+                    <div class="hero-info">
+
+                        <div>
+                            <strong>🔥</strong>
+                            <span>Ofertas<br>selecionadas</span>
+                        </div>
+
+                        <div>
+                            <strong>💰</strong>
+                            <span>Preços<br>comparados</span>
+                        </div>
+
+                        <div>
+                            <strong>⚡</strong>
+                            <span>Atualizações<br>frequentes</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD VISUAL DO HERO -->
+                <div class="hero-card-wrapper">
+
+                    <div class="hero-glow"></div>
+
+                    <div class="hero-card">
+
+                        <div class="hero-card-top">
+                            <span>🔥 OFERTA EM DESTAQUE</span>
+                            <span class="live">● AO VIVO</span>
+                        </div>
+
+                        <div class="product-preview">
+
+                            <div class="product-image-placeholder">
+                                🛍️
+                            </div>
+
+                            <div class="product-preview-info">
+
+                                <span class="preview-category">
+                                    ACHADINHO
+                                </span>
+
+                                <h3>
+                                    As melhores ofertas em um só lugar
+                                </h3>
+
+                                <div class="preview-price">
+                                    <span>Confira os preços</span>
+                                    <strong>→</strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CATEGORIAS -->
+        <section class="categories-section" id="categorias">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">CATEGORIAS</span>
+
+                        <h2>
+                            O que você está procurando?
+                        </h2>
+                    </div>
+
+                    <p>
+                        Explore nossas categorias e encontre seu próximo achadinho.
+                    </p>
+
+                </div>
+
+
+                <div class="categories-grid">
+
+                    {% for category in categories %}
+
+                    <a
+                        href="#ofertas"
+                        class="category-card"
+                        data-category="{{ category.name }}"
+                    >
+
+                        <div class="category-icon">
+                            {{ category.icon }}
+                        </div>
+
+                        <div>
+                            <h3>{{ category.name }}</h3>
+                            <span>Ver ofertas →</span>
+                        </div>
+
+                    </a>
+
+                    {% empty %}
+
+                    <div class="empty-category">
+                        <span>🛍️</span>
+                        <p>As categorias aparecerão aqui.</p>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OFERTAS -->
+        <section class="offers-section" id="ofertas">
+
+            <div class="container">
+
+                <div class="section-heading offers-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            ACHADINHOS
+                        </span>
+
+                        <h2>
+                            Ofertas selecionadas
+                        </h2>
+
+                    </div>
+
+                    <div class="filters">
+
+                        <div class="search-box">
+                            <span>⌕</span>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Pesquisar produto..."
+                            >
+                        </div>
+
+                        <select id="categoryFilter">
+                            <option value="todas">
+                                Todas
+                            </option>
+
+                            {% for category in categories %}
+                            <option value="{{ category.name }}">
+                                {{ category.name }}
+                            </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="products-grid">
+
+                    {% for product in products %}
+
+                    <article
+                        class="product-card"
+                        data-name="{{ product.name }}"
+                        data-category="{{ product.category.name }}"
+                    >
+
+                        <div class="product-image">
+
+                            {% if product.image %}
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                >
+                            {% elif product.image_url %}
+                                <img
+                                    src="{{ product.image_url }}"
+                                    alt="{{ product.name }}"
+                                >
+                            {% else %}
+                                <div class="no-image">
+                                    🛍️
+                                </div>
+                            {% endif %}
+
+                            {% if product.discount > 0 %}
+                                <span class="discount">
+                                    -{{ product.discount }}%
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="product-content">
+
+                            <div class="product-platform">
+                                {{ product.platform }}
+                            </div>
+
+                            <h3 class="product-name">
+                                {{ product.name }}
+                            </h3>
+
+                            {% if product.description %}
+                            <p class="product-description">
+                                {{ product.description }}
+                            </p>
+                            {% endif %}
+
+
+                            <div class="prices">
+
+                                {% if product.old_price %}
+                                <span class="old-price">
+                                    R$ {{ product.old_price }}
+                                </span>
+                                {% endif %}
+
+                                <strong>
+                                    R$ {{ product.current_price }}
+                                </strong>
+
+                            </div>
+
+
+                            <a
+                                href="{% url 'go' product.id %}"
+                                class="affiliate-link product-button"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Ver oferta
+                                <span>↗</span>
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                    {% empty %}
+
+                    <div class="empty-products">
+
+                        <div class="empty-icon">
+                            🔎
+                        </div>
+
+                        <h3>Nenhuma oferta cadastrada ainda</h3>
+
+                        <p>
+                            Em breve você encontrará vários achadinhos aqui.
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+        <section class="cta-section">
+
+            <div class="container">
+
+                <div class="cta-card">
+
+                    <div class="cta-glow"></div>
+
+                    <span class="section-label">
+                        SEMPRE PROCURANDO
+                    </span>
+
+                    <h2>
+                        Seu próximo achadinho
+                        <span>pode estar aqui.</span>
+                    </h2>
+
+                    <p>
+                        Fique de olho nas ofertas e encontre produtos
+                        interessantes sem precisar procurar em vários lugares.
+                    </p>
+
+                    <a href="#ofertas" class="primary-button">
+                        Ver ofertas
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SOBRE -->
+        <section class="about-section" id="sobre">
+
+            <div class="container about-content">
+
+                <div>
+
+                    <span class="section-label">
+                        SOBRE O SITE
+                    </span>
+
+                    <h2>
+                        Ofertas simples,
+                        <span>sem complicação.</span>
+                    </h2>
+
+                </div>
+
+                <p>
+                    Este site reúne produtos e ofertas encontrados em
+                    diferentes plataformas. Alguns links podem ser links
+                    de afiliado, o que significa que uma compra através
+                    deles pode gerar uma pequena comissão, sem custo
+                    adicional para você.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="container footer-content">
+
+            <div class="logo">
+                🔥 Ofertas<span class="logo-highlight">Nix</span>
+            </div>
+
+            <span>
+                © {% now "Y" %} OfertaNix
+            </span>
+ 
+        </div>
+
+    </footer>
+
+
+    <script src="{% static 'ofertas/app.js' %}"></script>
+
+</body>
+</html>
