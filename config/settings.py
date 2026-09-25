@@ -10,11 +10,7 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "ofertanix-q29q2.faable.link",
-]
+ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
