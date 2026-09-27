@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField("nome", max_length=80, unique=True)
@@ -22,7 +23,12 @@ class Product(models.Model):
     platform = models.CharField("plataforma", max_length=30, choices=PLATFORMS)
     affiliate_url = models.URLField("link de afiliado", max_length=1000)
     image_url = models.URLField("URL da imagem", blank=True, max_length=1000)
-    image = models.ImageField("imagem enviada", upload_to="products/", blank=True)
+    image = CloudinaryField(
+    "imagem enviada",
+    folder="nix-ofertas/products",
+    blank=True,
+    null=True,
+)
     current_price = models.DecimalField("preço atual", max_digits=10, decimal_places=2)
     old_price = models.DecimalField("preço antigo", max_digits=10, decimal_places=2, null=True, blank=True)
     featured = models.BooleanField("destaque", default=False)
